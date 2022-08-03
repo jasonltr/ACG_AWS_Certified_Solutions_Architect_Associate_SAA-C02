@@ -17,46 +17,46 @@ Try to document lab exercises to show proof of concepts
 ### Exercise Create an S3 bucket
 
 - Create a new bucket with unique name
-![](/images/s3_1.png)
+![](/s3_lab/images/s3_1.png)
 - Upload some files
-![](/images/s3_2.png)
+![](/s3_lab/images/s3_2.png)
 - Able to modify the storage class at the object OR bucket level
-![](/images/s3_3.png)
+![](/s3_lab/images/s3_3.png)
 - go to bucket > permissions > uncheck block public access
-![](/images/s3_4.png)
+![](/s3_lab/images/s3_4.png)
 - go to the object itself > Actions > share with presigned url > 1 minute > paste url onto browser to see the image
-![](/images/s3_5.png)
+![](/s3_lab/images/s3_5.png)
 
 ### Pricing tiers
 - storage costs v accessibility, need to understand the balance between these 2 to get the best value
-![](/images/s3_6.png)
+![](/s3_lab/images/s3_6.png)
 
 ### S3 Security and encyption
 - bucket policies/access control list
 - server side encryption on object
-![](/images/s3_7.png)
+![](/s3_lab/images/s3_7.png)
 - server side encryption on whole bucket
 - every object uploaded will be encrypted because the bucket itself is encrypted
-![](/images/s3_8.png)
+![](/s3_lab/images/s3_8.png)
 
 ### S3 Versioning
 - Create a new bucket with the following settings
-![](/images/s3_9.png)
+![](/s3_lab/images/s3_9.png)
 - upload the hello.txt and modify the file and upload again
 - in the bucket, enable `show versions` to see the previous versionss
-![](/images/s3_10.png)
+![](/s3_lab/images/s3_10.png)
 - delete the file, enable show versions,  the files should still appear in the list. The files should still be able to be opened
-![](/images/s3_11.png)
+![](/s3_lab/images/s3_11.png)
 - deleting the marker restores the files
 - after permanently deleting the marker, the original file and its versions reappear
 - versioning can only be suspended, new objects will not be versionsed, but any previous objects with versions will be preserved
-![](/images/s3_12.png)
+![](/s3_lab/images/s3_12.png)
 - each version can be deleted individually
 
 ### S3 lifecycle management
 - go to version bucket > create lifecycle rule
-![](/images/s3_13.png)
-![](/images/s3_14.png)
+![](/s3_lab/images/s3_13.png)
+![](/s3_lab/images/s3_14.png)
 - can play around with the lifecycle rules to manage the movement of files for accessibility/storage/cost reasons
 - again need to study the use case to get the best value out of the lifecycle rules
 
@@ -65,14 +65,14 @@ Try to document lab exercises to show proof of concepts
 - IAM > create new role > ec2 > s3, select s3fullaccess
 - The created role will have full access to s3 services only `S3_Cross_Account_Access`
 - Add user > give a username and pw > create group > get link to login
-![](/images/s3_15.png)
+![](/s3_lab/images/s3_15.png)
 - Basically account 2 will have a role assigned to them by account 1, and account 2 will have admin rights to account 1's s3 services 
 
 ### Cross replication of s3 bucket across regions
 - create a destination bucket2, objects uploaded to bucket1 will be replicated in bucket2
-![](/images/s3_16.png)
+![](/s3_lab/images/s3_16.png)
 - go to bucket1 > management > replication rules > create replication rule
-![](/images/s3_17.png)
-![](/images/s3_18.png)
+![](/s3_lab/images/s3_17.png)
+![](/s3_lab/images/s3_18.png)
 - results in bucket2, took some time, but files are replicated
-![](/images/s3_19.png)
+![](/s3_lab/images/s3_19.png)
