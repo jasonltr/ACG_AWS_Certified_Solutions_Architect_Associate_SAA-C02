@@ -12,3 +12,8 @@ Main topics to focus on are
 Try to document lab exercises to show proof of concepts
 
 ## S3
+- Starts frmom slide 57, follow the [.txt](/S3%20101.txt) and [.pdf](/1621966269571-AWS%20Certified%20Solutions%20Architect%20Associate%20SAA-C02%20NEW%20PDF_compressed.pdf)
+
+### Exercise Create an S3 bucket
+
+![](/images/s3_1.png)
