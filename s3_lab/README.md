@@ -9,6 +9,16 @@ Main topics to focus on are
 - Route 53
 - VPC
 
+- [ACG_AWS_Certified_Solutions_Architect_Associate_SAA-C02](#acg_aws_certified_solutions_architect_associate_saa-c02)
+- [S3](#s3)
+  - [Exercise Create an S3 bucket](#exercise-create-an-s3-bucket)
+  - [Pricing tiers](#pricing-tiers)
+  - [S3 Security and encyption](#s3-security-and-encyption)
+  - [S3 Versioning](#s3-versioning)
+  - [S3 lifecycle management](#s3-lifecycle-management)
+  - [Sharing s3 buckets across accounts (need 2 aws accounts)](#sharing-s3-buckets-across-accounts-need-2-aws-accounts)
+  - [Cross replication of s3 bucket across regions](#cross-replication-of-s3-bucket-across-regions)
+
 Try to document lab exercises to show proof of concepts
 
 ## S3

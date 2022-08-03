@@ -9,6 +9,17 @@ Main topics to focus on are
 - Route 53
 - VPC
 
+- [ACG_AWS_Certified_Solutions_Architect_Associate_SAA-C02](#acg_aws_certified_solutions_architect_associate_saa-c02)
+- [Route 53](#route-53)
+  - [DNS 101 Domain Name System](#dns-101-domain-name-system)
+  - [Register a Domain Name](#register-a-domain-name)
+  - [Simple routing](#simple-routing)
+  - [weighted routing policy](#weighted-routing-policy)
+  - [latency based routing](#latency-based-routing)
+  - [failover routing policy](#failover-routing-policy)
+  - [geolocation routing policy](#geolocation-routing-policy)
+
+
 Try to document lab exercises to show proof of concepts
 
 ## Route 53
