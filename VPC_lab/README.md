@@ -19,7 +19,7 @@ Try to document lab exercises to show proof of concepts
 ## create a vpc and subnet
 - using aws console create a vpc
 ![](/VPC_lab/images/vpc_3.png)
-- this is what we have created so far
+- this is what we have created so far, SG, NACL and RT are created automatically with default settings
 ![](/VPC_lab/images/vpc_2.png)
 - create two subnets
 ![](/VPC_lab/images/vpc_4.png)
