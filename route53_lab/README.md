@@ -41,3 +41,24 @@ Try to document lab exercises to show proof of concepts
 - delete the previous A record
 - create record set > paste IP addresses > select weighted for routing policy > essentially multiple records for the domain name with the desired weights
 ![](/route53_lab/images/53_5.png)
+
+### latency based routing
+- route53 will check which instance gives the fastest response time to the user and connect to that instance
+- using a VPN to spoof your location will trigger the route53 to direct you to different instances based on the spoofed location
+- in the route53 record set, change routing policy to latency and create a record for each instance
+![](/route53_lab/images/53_6.png)
+
+### failover routing policy
+- active/passive set up
+- when active instance is down, traffic will be redirected to passive instance
+- change routing policy to failover
+![](/route53_lab/images/53_7.png)
+- test this by stopping the main instance on ec2
+
+### geolocation routing policy
+- directing traffic based on location of users
+- create new record set for your domain name
+- select routing policy as geolocation
+- set the appropriate location for the respective IP
+![](/route53_lab/images/53_8.png)
+- again use a VPN to test
