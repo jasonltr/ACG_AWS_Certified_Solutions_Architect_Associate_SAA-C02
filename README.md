@@ -11,4 +11,4 @@ Main topics to focus on are
 
 Try to document lab exercises to show proof of concepts
 
-### S3
+## S3
