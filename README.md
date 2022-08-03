@@ -10,3 +10,5 @@ Main topics to focus on are
 - VPC
 
 Try to document lab exercises to show proof of concepts
+
+### S3
