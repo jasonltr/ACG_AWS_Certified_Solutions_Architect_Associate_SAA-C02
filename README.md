@@ -59,3 +59,20 @@ Try to document lab exercises to show proof of concepts
 ![](/images/s3_14.png)
 - can play around with the lifecycle rules to manage the movement of files for accessibility/storage/cost reasons
 - again need to study the use case to get the best value out of the lifecycle rules
+
+### Sharing s3 buckets across accounts (need 2 aws accounts)
+- cross account IAM roles. Programmatic AND console access
+- IAM > create new role > ec2 > s3, select s3fullaccess
+- The created role will have full access to s3 services only `S3_Cross_Account_Access`
+- Add user > give a username and pw > create group > get link to login
+![](/images/s3_15.png)
+- Basically account 2 will have a role assigned to them by account 1, and account 2 will have admin rights to account 1's s3 services 
+
+### Cross replication of s3 bucket across regions
+- create a destination bucket2, objects uploaded to bucket1 will be replicated in bucket2
+![](/images/s3_16.png)
+- go to bucket1 > management > replication rules > create replication rule
+![](/images/s3_17.png)
+![](/images/s3_18.png)
+- results in bucket2, took some time, but files are replicated
+![](/images/s3_19.png)
