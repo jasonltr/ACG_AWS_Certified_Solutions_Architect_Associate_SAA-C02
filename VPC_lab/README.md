@@ -46,3 +46,16 @@ Try to document lab exercises to show proof of concepts
 - connect to instance1 via ec2 instance connect
 - ping private IP of instance 2 
 ![](/VPC_lab/images/vpc_12.png)
+
+## NAT Gateway
+- allow instances in the private subnet to access internet 
+![](/VPC_lab/images/vpc_13.png)
+- create NAT gateway on aws console
+- go to main route table and edit route
+- add 0.0.0.0/0 target the NAT gateway that was just created
+![](/VPC_lab/images/vpc_14.png)
+- ssh into instance1, then from instance 1 ssh into instance2
+![](/VPC_lab/images/vpc_15.png)
+- try to install packages (to test the NAT gateway is working)
+![](/VPC_lab/images/vpc_16.png)
+- Success!
