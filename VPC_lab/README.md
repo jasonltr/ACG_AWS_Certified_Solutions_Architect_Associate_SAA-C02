@@ -24,3 +24,14 @@ Try to document lab exercises to show proof of concepts
 - create two subnets
 ![](/VPC_lab/images/vpc_4.png)
 ![](/VPC_lab/images/vpc_5.png)
+- create internet gateway and attach to your vpc
+- you can only have one internet gateway attached to one vpc
+- go to route table to create a new route table for public subnets only
+- configure that route table, edit route and add 0.0.0.0/0 as destination, target is internet gateway
+![](/VPC_lab/images/vpc_6.png)
+- go to subnet association, select 10.0.1.0/24, this instance will now be exposed to public via internet
+- the original route table will have 10.0.2.0/24 but no longer have 10.0.1.0/24
+- we now have a public subnet, and a private subnet
+- next will be creating instances in each of these subnets
+![](/VPC_lab/images/vpc_9.png)
+![](/VPC_lab/images/vpc_8.png)
