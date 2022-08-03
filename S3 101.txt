@@ -1,0 +1,459 @@
+Okay, hello Cloud Gurus
+and welcome to this lecture.
+This lecture is on S3.
+And as I mentioned in the last lecture,
+S3 is one of the oldest AWS services,
+and it makes up an awful lot
+of the Certified Solutions Architect associate exam.
+So what is S3?
+Well S3 basically stands for simple storage service.
+So it's three S's, that's why it's called S3.
+And it provides developers and IT teams
+with secure, durable, highly scalable object storage.
+And S3 is easy to use, the simple web services interfaces
+to store and retrieve any amount of data
+from anywhere on the web.
+So what does that actually mean?
+Well, basically, S3 is a safe place to store your files.
+And that's all it means by objects.
+So when we say object storage,
+we're talking about things flat files, basically.
+So Word documents, pictures, movies, et cetera, et cetera.
+So S3 is basically a safe place to store your files.
+It's object based storage,
+and the data is spread across multiple devices
+and multiple facilities.
+And so the basics of S3 are as follows;
+it's object based, it allows you to upload files.
+And your files can be anywhere from zero bytes
+all the way up to five terabytes.
+There is unlimited storage and files are stored
+in these things called buckets.
+Now, when I first heard about buckets,
+it sounded a bit strange.
+But a bucket is basically just a folder, that's all it is.
+So it's a folder in which to put your files.
+Now the thing about S3 is that S3 is a universal namespace.
+So what does that actually mean?
+Well, all that means is that the names
+must be unique globally.
+So when I create a bucket, I can't just use test bucket
+because someone's already taken that.
+I can't use A Cloud Guru because I took that
+a long, long time ago, in another AWS account.
+So when you create a bucket, the name has to be unique.
+And the reason for that
+is it's actually creating a web address.
+So if we were going to create a bucket in Northern Virginia,
+which is the default AWS region,
+and we call it A Cloud Guru,
+it's going to create a web address,
+acloudguru.s3.amazonaws.com.
+Alternatively, if we were to create the bucket,
+not in Northern Virginia, but let's say in Ireland,
+it would generate this name.
+So it'd be acloudguru, so the bucket name,
+and then dot and then eu-west-1, which is the region
+and then .amazon aws.com.
+So those are the two different types
+of examples of bucket names.
+Like I said, S3 is a universal namespace,
+so all that you have to remember is that
+bucket names must be unique.
+And the reason for that is
+you're actually creating a web address.
+Now when you upload a file to S3,
+you're going to receive an HTTP 200 code
+if the upload was successful,
+and that's going to come back to your browser.
+And that can be a very popular exam topic.
+So just remember, if you have a scenario question
+and it's looking at you uploading a file to S3,
+and it asks you what code you will receive back,
+it's an HTTP 200 code back to your browser.
+Moving on, I keep saying that S3 is object based
+and just think of objects as files,
+and objects basically consists of the following.
+So we've got a key, and this is simply
+the name of the object.
+So the file name of the object.
+We then have the value, and this is simply the data
+that is made up of a sequence of bytes.
+So it's just the data.
+We then have a version ID,
+and this is important for versioning.
+And we're going to have a lab on versioning.
+But effectively, S3 allows you to have
+multiple versions of your file.
+So you can have version one, which says hello, cloud gurus,
+and then you could go in and upload a file
+with the same name and change the file
+so it says hello, cloud gurus, welcome to version two
+or something like that.
+And then you'll have both versions of the object in S3,
+and you'll be able to do version control.
+So you could go back to a previous version.
+So S3 allows you to do versioning.
+And like I said, we're going to have a lab on that.
+We also then have metadata.
+If you've never heard the term metadata before,
+it just simply means data about data.
+So it's data about the data that you're storing.
+So you may say, "Okay, this object belongs
+"to the finance department,
+"this is our payroll spreadsheet."
+Something like that.
+And then it has a bunch of different subresources.
+So we have access control lists, and we also have torrents.
+We are going to cover all the access control lists
+and bucket policies coming up.
+So now that you know what S3 is,
+and that is just a safe place
+to store your objects in the cloud.
+You really have to understand the data consistency model
+for S3 going into your exam.
+So how does S3 keep your data consistent?
+Well, basically S3 has two things:
+it has read after write consistency for PUTS of new objects,
+and then has eventual consistency
+for overwrite PUTS and DELETES.
+Now I know what you're thinking, what does that mean?
+Well, the first one read after write consistency
+for PUTS of new objects, all that means is
+if you upload a file to S3,
+you are able to read it immediately.
+So you are able to read it straight after writing to it,
+and that's basically you're just doing a PUT
+of that object into S3.
+Now if you were to go in and basically update that object
+or delete that object, so overwrite that object,
+then it's only going to be eventual consistency.
+So let's say we've got version one of the file,
+and then we upload version two,
+and you immediately try and read that object.
+Basically, what's going to happen is,
+you might get version one, or you might get version two.
+But if you wait like a second,
+you're always going to get version two.
+So there's eventual consistency
+for overwrite PUTS and DELETES.
+So even when you're overwriting a file,
+or you're deleting a file,
+eventually it's going to be consistent.
+That's all that means.
+So you have read after write consistency
+for PUTS of new objects and you have eventual consistency
+for overwrite PUTS and DELETES.
+So in other words, if you write a new file
+and read it immediately afterwards,
+you will be able to view that data.
+And if you update an existing file or delete a file
+and read it immediately,
+you may get the older version or you may not
+basically the changes can take
+a little bit of time to propagate.
+So what are the S3 guarantees?
+What does Amazon guarantee from S3?
+It was built for 99.99% availability,
+and Amazon will guarantee 99.9% availability.
+And Amazon guarantees 99.9999.
+I'm not going to say it, but basically this is referred to
+as 11 nines, because there's 11 nines there,
+durability for S3.
+So just remember 11 nines.
+So what does that mean?
+Well, that means if you put your object up in S3,
+it's not, it's very, very unlikely
+that it's going to be lost.
+It's only going to be the lost one in,
+however many nines that is.
+So it basically guarantees the durability of your object.
+And then S3 has these following features.
+So it's got tiered storage.
+So it's got different storage tiers,
+and this is a fundamentally important topic going into
+your Certified Solutions Architect exam.
+This is worth like, four or five points.
+You need to know this different tiers.
+And we'll come on to that in a, in the next slide.
+We also have Lifecycle Management.
+So you can actually go through
+and move your objects around to different storage tiers.
+So you could say, "Hey, when this file is 30 days old,
+"move it to this tier, when it's 90 days old,
+"archive it off to Glacier."
+And I'll cover what Glacier is in a second.
+It also allows you to do versioning.
+So you can have multiple versions of objects
+in your S3 buckets.
+You're allowed, you're able to encrypt your objects,
+you're allowed to encrypt them at rest.
+And there's different encryption mechanisms,
+which we'll cover off in another lecture.
+Again, this is really important,
+you're able to use multi factor authentication
+for deleting objects.
+So when you turn this on,
+if someone goes into delete an object,
+they're going to need two factor authentication
+in which to do this.
+They're going to need to use something
+like Google Authenticator.
+And then you secure your data using
+access control lists and bucket policies.
+And we're going to cover those off later on
+in this section of the course as well.
+So I talked about the different storage classes
+and how important they are to, you know, passing your exam.
+So let's cover them off now.
+So S3 standard, this is the one with 99.99% availability
+and 11 nines of durability.
+And it's stored redundant across multiple devices
+in multiple facilities, and is designed to sustain
+the loss of two facilities concurrently.
+So it is really, really highly available and highly durable.
+We then have S3 infrequently accessed.
+And this is basically for data that is accessed
+less frequently, but requires rapid access when you need it.
+So you get a lower storage fee than S3,
+but you are charged a retrieval fee.
+So if you've got data that you need to be able
+to instantly access, but you pretty much don't you know,
+you don't use that data regularly,
+maybe you only need to check it at the end of every month,
+then you'd want S3 infrequently access.
+We then also have S3 one zone infrequently access
+and this is when you want around really low cost option
+for your infrequently accessed data.
+And you don't even need, you don't have to worry
+about multiple availability zones.
+So it's literally just stored in one availability zone.
+And it's infrequently accessed,
+but you still need to be able to access that data instantly.
+And then at Reinvent in 2018, Amazon released
+S3 Intelligent Tiering.
+This is really cool technology.
+This is using machine learning.
+And basically what it does, is it looks at
+how often you use your objects,
+and then it will move your objects around
+the different storage classes based on what it's learned.
+So it will move it from S3 standard
+to S3 infrequently accessed because it knows
+that you don't access those files.
+So that's S3 intelligent tiering.
+Those are the four storage classes.
+We then have Glacier, and Glacier comes in two flavors.
+So we've got normal S3 Glacier
+and then we've got S3 Glacier Deep Archive.
+And so Glacier is basically for data archiving.
+So if you want to archive off your data,
+maybe you don't need it,
+maybe you have to hold on to it for seven years
+because of some federal regulation,
+you would be using Glacier.
+Now you can store any amount of data
+and it's really super, super cheap.
+And then your retrieval times are configurable
+from minutes to hours.
+Now a Glacier Deep Archive, that's the lowest storage class,
+the lowest cost storage class that you can buy,
+but your retrieval time is going to be 12 hours.
+So if you want to get the data back using Deep Archive,
+you put in a request and it will come back 12 hours later.
+So those are the six different storage tiers.
+And you will need to remember those going into your exam.
+And so here is a table that compares
+the different storage tiers.
+The thing that you should really note
+is the first byte latency,
+that's how quickly you'll be able to access your data.
+So it's milliseconds for everything
+apart from S3 Glacier and Glacier Deep Archive.
+So it can be minutes or hours, or it could be up to 12 hours
+if you're using Deep Archive.
+So bear that in mind as well.
+So how are you going to be billed for S3?
+Well, you're charged in the following ways.
+You're charged in terms of storage.
+So the more you store in S3,
+the more you're going to be billed.
+You're also charged on a number of requests.
+If you're making a lot of requests to those objects,
+it's going to be more expensive.
+You then get charged on the storage management pricing.
+So this is the different, you know,
+tiers that are available.
+You then also get a charged on data transfer pricing.
+And then you also get charged for Transfer Acceleration
+and cross region replication.
+And don't worry, we're going to cover
+exactly what those two things are right now.
+So what is cross region replication?
+Well, let's say you've got a bucket and it's in US East one.
+And you want to automatically replicate your objects
+to another bucket that's in, let's say, in Sydney,
+and you want to do that for high availability
+as well as, you know, disaster recovery.
+So what will happen is as soon as you upload an object
+to your bucket in US East one,
+and you've got cross region replication turned on,
+those objects will automatically be replicated
+over to your bucket in Sydney.
+And we're going to have a lab on that coming up.
+We then also have S3 Transfer Acceleration.
+This enables fast, easy and secure transfers
+of files over long distances
+between your end users and an S3 bucket.
+And basically, it's taking advantage of
+Amazon's CloudFront's globally distributed edge locations.
+And then the data arrives at an edge location
+it's routed to Amazon S3 over an optimized network path.
+And essentially what they're doing is they're using
+the Amazon backbone network.
+So let's have a look at how this works.
+We've got our users all around the world
+and then we've got our edge locations.
+And essentially if you turn on Transfer Acceleration,
+they are uploading their files to the edge locations
+rather than to the S3 bucket itself.
+And then this goes over Amazon's backbone networks,
+Amazon's own network straight back
+to where your bucket is located,
+and can really speed up your users upload times.
+And we're going to have a lab on that.
+And we're going to see how it works
+from all the different locations in the world
+coming up in this section of the course.
+So you've done really, really well
+we're at the end of this lecture,
+let's look at my exam tips.
+So just remember that S3 is object based,
+it allows you to upload files,
+those files can be zero bytes to five terabytes in size,
+there's unlimited storage,
+and your files are stored in these things called buckets.
+And a bucket is basically just a folder in the cloud.
+And S3 is a universal namespace.
+And all that means is that the name of your bucket
+must be unique globally.
+So you can't take test bucket for example,
+you won't be able to take A Cloud Guru bucket
+because I own that.
+And when you create your bucket, it's going to create
+a DNS name or a web address name.
+So it's going to be https//acloudguru.
+So the bucket name and then dot, and then S3.amazonaws.com
+that's if it's created in Northern Virginia,
+which is the default region.
+Or if you create it in another region,
+it will have the region name in the sub domain.
+So it'd be acloudguru.eu-west-1,
+which is in Ireland .amazon.aws.com.
+Moving on, just remember that S3, because it is object base,
+it's not suitable to install an operating system
+or a database on.
+So it's not, you know, that's not that type of storage.
+For that you will want block based storage.
+This is object based storage.
+So essentially, it's only used to store files,
+you're not going to install an operating system on S3
+and you're not going to use it to host the database.
+And when you successfully upload an object to S3,
+you're going to get an HTTP 200 status code.
+Also, remember that you can protect your objects
+by turning on multi factor authentication delete,
+that's really important to remember going into your exam.
+So that's how you can protect your objects
+so that somebody doesn't go and accidentally delete them,
+they'll need to do multi factor authentication.
+Remember the key fundamentals of S3.
+So what makes up an S3 object?
+Well we have the key, and this is simply
+the name of the object,
+we then have the value, and this is simply the data
+and it's made up of a sequence of bytes.
+We then have the version ID,
+this is important for versioning.
+We have metadata, which is data about
+the data that you're storing.
+We then have some sub-resources within here.
+So we've got access control lists, and torrents.
+And that access control list basically
+is the permissions of that object.
+And you can lock each object down individually.
+So you can do it at a bucket level,
+and you can also do it at an object level as well.
+We're going to cover that off later on in the course.
+Now, this is really important to remember
+the consistency models.
+So it's read after write consistency
+for PUTS of new objects.
+So as soon as you create a new object,
+you'll be able to read that object immediately.
+But if you update an object or delete an object,
+and you try and read it immediately,
+you're going to only get eventual consistency.
+So you might get the auto object,
+or you might still see the deleted file.
+But if you wait about a second, it's going to be consistent.
+So you get eventual consistency.
+And pretty much the most important thing to remember
+going into your exam, are the different storage classes.
+We've got S3 standard, this is 99.99% availability.
+11 nines of durability.
+We then have S3 infrequently accessed.
+This is basically where you need, you know,
+you're going to pay a lower fee than standard S3,
+but you need instant access,
+and you are charged a retrieval fee as well.
+We then have S3 one zone-IA
+or one zone infrequently accessed.
+This is where you want a lower cost option
+for your infrequently accessed data,
+but you don't require multiple availability zones.
+And just so you guys know,
+prior to S3 one zone infrequently accessed
+we had a storage class called S3,
+reduce redundancy storage or RRS.
+That service still does exist,
+but it is being phased out.
+I just did the exam the other day,
+and I was surprised to see it still mentioning RRS
+because it is being phased out.
+But just that, if you do see RRS in your exam,
+just think of S3 one zone infrequently accessed storage,
+and that's basically more or less the same service.
+They're not quite the same
+because they have different availability,
+you know, SLAs et cetera et cetera,
+but essentially, it's a place where you put your files
+where you don't care if you're going to lose them.
+If durability is not an issue,
+you just want a cheap cost of storage,
+then you want to S3 one zone IA
+or sometimes it's referred to as S3 RRS.
+We then have the S3 intelligent tiering,
+and this is basically using machine learning
+and it will move objects around the different tiers of S3
+to maximize your cost savings.
+We then have S3 Glacier,
+this is for data archival,
+and you can configure your retrieval times.
+It can be anywhere from minutes to hours.
+And then if you want the lowest cost storage available,
+then you want S3 Glacier Deep Archive.
+And this is Amazon's lowest cost storage class
+where a retrieval time of 12 hours is acceptable.
+And then finally, the one thing I would say
+is go and read the S3 FAQs before taking the exam.
+S3 makes up a quite a bit of the exam,
+it's going to come up an awful lot.
+So just have a read through the S3 FAQs.
+Now of course, the best way to learn anything with AWS
+is to get our hands dirty.
+So in the next lecture, what we're going to do
+is we're going to go in and create an S3 bucket.
+So if you've got the time,
+please join me in the next lecture.
+Thank you.
