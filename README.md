@@ -16,4 +16,13 @@ Try to document lab exercises to show proof of concepts
 
 ### Exercise Create an S3 bucket
 
+- Create a new bucket with unique name
 ![](/images/s3_1.png)
+- Upload some files
+![](/images/s3_2.png)
+- Able to modify the storage class at the object OR bucket level
+![](/images/s3_3.png)
+- go to bucket > permissions > uncheck block public access
+![](/images/s3_4.png)
+- go to the object itself > Actions > share with presigned url > 1 minute > paste url onto browser to see the image
+![](/images/s3_5.png)
