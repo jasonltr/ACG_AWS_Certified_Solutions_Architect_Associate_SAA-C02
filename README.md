@@ -39,3 +39,21 @@ Try to document lab exercises to show proof of concepts
 - every object uploaded will be encrypted because the bucket itself is encrypted
 ![](/images/s3_8.png)
 
+### S3 Versioning
+- Create a new bucket with the following settings
+![](/images/s3_9.png)
+- upload the hello.txt and modify the file and upload again
+- in the bucket, enable `show versions` to see the previous versionss
+![](/images/s3_10.png)
+- delete the file, enable show versions,  the files should still appear in the list. The files should still be able to be opened
+![](/images/s3_11.png)
+- deleting the marker restores the files
+- after permanently deleting the marker, the original file and its versions reappear
+- versioning can only be suspended, new objects will not be versionsed, but any previous objects with versions will be preserved
+![](/images/s3_12.png)
+- each version can be deleted individually
+
+### S3 lifecycle management
+- go to version bucket > create lifecycle rule
+![](/images/s3_13.png)
+![](/images/s3_14.png)
