@@ -33,5 +33,16 @@ Try to document lab exercises to show proof of concepts
 - the original route table will have 10.0.2.0/24 but no longer have 10.0.1.0/24
 - we now have a public subnet, and a private subnet
 - next will be creating instances in each of these subnets
+- one instance for public subnet, one instance for private subnet
+- new SG for the instance in public subnet
 ![](/VPC_lab/images/vpc_9.png)
+- this is what we have created so far
 ![](/VPC_lab/images/vpc_8.png)
+
+- create new SG to allow communication between instance1 in public subnet with instance2 in private subnet via private IP
+![](/VPC_lab/images/vpc_10.png)
+- go to instances and change instance2 sg to the sg that was just created
+![](/VPC_lab/images/vpc_11.png)
+- connect to instance1 via ec2 instance connect
+- ping private IP of instance 2 
+![](/VPC_lab/images/vpc_12.png)
