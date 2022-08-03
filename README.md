@@ -57,3 +57,5 @@ Try to document lab exercises to show proof of concepts
 - go to version bucket > create lifecycle rule
 ![](/images/s3_13.png)
 ![](/images/s3_14.png)
+- can play around with the lifecycle rules to manage the movement of files for accessibility/storage/cost reasons
+- again need to study the use case to get the best value out of the lifecycle rules
