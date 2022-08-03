@@ -18,8 +18,9 @@ Try to document lab exercises to show proof of concepts
 
 ## create a vpc and subnet
 - using aws console create a vpc
-![](/VPC_lab/images/vpc_2.png)
 ![](/VPC_lab/images/vpc_3.png)
-![](/VPC_lab/images/vpc_4.png)
 - this is what we have created so far
+![](/VPC_lab/images/vpc_2.png)
+- create two subnets
+![](/VPC_lab/images/vpc_4.png)
 ![](/VPC_lab/images/vpc_5.png)
