@@ -26,3 +26,16 @@ Try to document lab exercises to show proof of concepts
 ![](/images/s3_4.png)
 - go to the object itself > Actions > share with presigned url > 1 minute > paste url onto browser to see the image
 ![](/images/s3_5.png)
+
+### Pricing tiers
+- storage costs v accessibility, need to understand the balance between these 2 to get the best value
+![](/images/s3_6.png)
+
+### S3 Security and encyption
+- bucket policies/access control list
+- server side encryption on object
+![](/images/s3_7.png)
+- server side encryption on whole bucket
+- every object uploaded will be encrypted because the bucket itself is encrypted
+![](/images/s3_8.png)
+
