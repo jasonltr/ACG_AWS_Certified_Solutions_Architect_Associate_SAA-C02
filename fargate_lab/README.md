@@ -68,4 +68,102 @@ jason@DEV-52WP6M3:~/Documents/eks-blue-green$ eksctl create cluster --name farga
 2022-08-04 14:06:09 [ℹ]  deploying stack "eksctl-fargate-cluster3-cluster"
 2022-08-04 14:06:39 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
 2022-08-04 14:07:10 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:08:11 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:09:13 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:10:14 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:11:16 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:12:17 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:13:18 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:14:20 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:15:21 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:16:22 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:18:32 [ℹ]  creating Fargate profile "fp-default" on EKS cluster "fargate-cluster3"
+2022-08-04 14:22:54 [ℹ]  created Fargate profile "fp-default" on EKS cluster "fargate-cluster3"
+W0804 14:23:26.723248    2959 warnings.go:70] spec.template.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[0].key: beta.kubernetes.io/os is deprecated since v1.14; use "kubernetes.io/os" instead
+W0804 14:23:26.723303    2959 warnings.go:70] spec.template.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution.nodeSelectorTerms[0].matchExpressions[1].key: beta.kubernetes.io/arch is deprecated since v1.14; use "kubernetes.io/arch" instead
+2022-08-04 14:23:26 [ℹ]  "coredns" is now schedulable onto Fargate
+2022-08-04 14:24:33 [ℹ]  "coredns" is now scheduled onto Fargate
+2022-08-04 14:24:33 [ℹ]  "coredns" pods are now scheduled onto Fargate
+2022-08-04 14:24:33 [ℹ]  waiting for the control plane availability...
+2022-08-04 14:24:33 [✔]  saved kubeconfig as "/home/jason/.kube/config"
+2022-08-04 14:24:33 [ℹ]  no tasks
+2022-08-04 14:24:33 [✔]  all EKS cluster resources for "fargate-cluster3" have been created
+2022-08-04 14:24:36 [ℹ]  kubectl command should work with "/home/jason/.kube/config", try 'kubectl get nodes'
+2022-08-04 14:24:36 [✔]  EKS cluster "fargate-cluster3" in "us-east-1" region is ready
 ```
+```
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl get nodes
+NAME                                      STATUS   ROLES    AGE    VERSION
+fargate-ip-192-168-102-219.ec2.internal   Ready    <none>   2m5s   v1.22.6-eks-14c7a48
+fargate-ip-192-168-163-147.ec2.internal   Ready    <none>   117s   v1.22.6-eks-14c7a48
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl get pod --all-namespaces
+NAMESPACE     NAME                       READY   STATUS    RESTARTS   AGE
+kube-system   coredns-5d5bcc87bc-lpxj6   1/1     Running   0          6m43s
+kube-system   coredns-5d5bcc87bc-slbvc   1/1     Running   0          6m42s
+```
+- note these nodes are not visible in the ec2 page in aws console
+![](/fargate_lab/images/fargate_17.png)
+- try deploying a parrot webpage
+```
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl create service nodeport nginx --tcp=80:80
+service/nginx created
+```
+cheeck progress of node/pod creation
+```
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl get pod --all-namespaces -w
+NAMESPACE     NAME                       READY   STATUS    RESTARTS   AGE
+default       parrot-7b4bb89695-r46tz    0/1     Pending   0          24s
+kube-system   coredns-5d5bcc87bc-lpxj6   1/1     Running   0          15m
+kube-system   coredns-5d5bcc87bc-slbvc   1/1     Running   0          15m
+default       parrot-7b4bb89695-r46tz    0/1     Pending   0          52s
+default       parrot-7b4bb89695-r46tz    0/1     ContainerCreating   0          52s
+default       parrot-7b4bb89695-r46tz    1/1     Running             0          61s
+default       nginx-6799fc88d8-lsjg5     0/1     Pending             0          0s
+default       nginx-6799fc88d8-lsjg5     0/1     Pending             0          1s
+default       nginx-6799fc88d8-lsjg5     0/1     Pending             0          54s
+default       nginx-6799fc88d8-lsjg5     0/1     ContainerCreating   0          54s
+default       nginx-6799fc88d8-lsjg5     1/1     Running             0          61s
+```
+```
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl get nodes -w
+NAME                                      STATUS   ROLES    AGE     VERSION
+fargate-ip-192-168-102-219.ec2.internal   Ready    <none>   57m     v1.22.6-eks-14c7a48
+fargate-ip-192-168-128-180.ec2.internal   Ready    <none>   8m28s   v1.22.6-eks-14c7a48
+fargate-ip-192-168-134-173.ec2.internal   Ready    <none>   42m     v1.22.6-eks-14c7a48
+fargate-ip-192-168-163-147.ec2.internal   Ready    <none>   57m     v1.22.6-eks-14c7a48
+```
+```
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl create service nodeport nginx --tcp=80:80
+service/nginx created
+```
+```
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl exec nginx-6799fc88d8-lsjg5 -- curl -sS localhost:80/
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+- again to reiterate, there is nothing being created on ec2 
+
+
+
+
