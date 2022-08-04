@@ -40,7 +40,7 @@ Try to document lab exercises to show proof of concepts
 - success! website/image is launched without creation of any instance
 - note that ECS cluster was still created
 
-### use EKS + fargate to launch the parrot image/website
+### use EKS + fargate to launch the parrot image/website [tutorial](https://www.youtube.com/watch?v=DLmKMBZ_m3w)
 - Login to aws sandbox account 
 - using terminal, enter `aws configure` and enter credentials for the aws sandbox account
 - run the eksctl command below (install eksctl [here](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html))
@@ -105,8 +105,8 @@ kube-system   coredns-5d5bcc87bc-slbvc   1/1     Running   0          6m42s
 ![](/fargate_lab/images/fargate_17.png)
 - try deploying a nginx image
 ```
-jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl create service nodeport nginx --tcp=80:80
-service/nginx created
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl create deployment nginx --image=nginx
+deployment.apps/nginx created
 ```
 cheeck progress of node/pod creation
 ```
