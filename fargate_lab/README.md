@@ -103,7 +103,7 @@ kube-system   coredns-5d5bcc87bc-slbvc   1/1     Running   0          6m42s
 ```
 - note these nodes are not visible in the ec2 page in aws console
 ![](/fargate_lab/images/fargate_17.png)
-- try deploying a parrot webpage
+- try deploying a nginx image
 ```
 jason@DEV-52WP6M3:~/Documents/eks-blue-green$ kubectl create service nodeport nginx --tcp=80:80
 service/nginx created
