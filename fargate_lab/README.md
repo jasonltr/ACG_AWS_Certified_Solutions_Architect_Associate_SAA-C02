@@ -41,16 +41,31 @@ Try to document lab exercises to show proof of concepts
 - note that ECS cluster was still created
 
 ### use EKS + fargate to launch the parrot image/website
-- use terraform script from previous POC to create EKS cluster and its dependencies. (VPC,subnets,route tables etc)
-
+- Login to aws sandbox account 
+- using terminal, enter `aws configure` and enter credentials for the aws sandbox account
+- run the eksctl command below (install eksctl [here](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html))
 ```
-Apply complete! Resources: 52 added, 0 changed, 1 destroyed.
-
-Outputs:
-
-cluster_endpoint = "https://5BC90AFAF203F02570B3DEBC11AAC51A.gr7.us-east-1.eks.amazonaws.com"
-cluster_id = "eks-blue-green"
-cluster_name = "eks-blue-green"
-cluster_security_group_id = "sg-038311c99395cbef4"
-config_map_aws_auth = [
+jason@DEV-52WP6M3:~/Documents/eks-blue-green$ eksctl create cluster --name fargate-cluster3 --region us-east-1 --zones=us-east-1a,us-east-1b,us-east-1d --fargate
+2022-08-04 14:06:07 [ℹ]  eksctl version 0.107.0
+2022-08-04 14:06:07 [ℹ]  using region us-east-1
+2022-08-04 14:06:07 [ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
+2022-08-04 14:06:07 [ℹ]  subnets for us-east-1b - public:192.168.32.0/19 private:192.168.128.0/19
+2022-08-04 14:06:07 [ℹ]  subnets for us-east-1d - public:192.168.64.0/19 private:192.168.160.0/19
+2022-08-04 14:06:07 [ℹ]  using Kubernetes version 1.22
+2022-08-04 14:06:07 [ℹ]  creating EKS cluster "fargate-cluster3" in "us-east-1" region with Fargate profile
+2022-08-04 14:06:07 [ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-east-1 --cluster=fargate-cluster3'
+2022-08-04 14:06:07 [ℹ]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "fargate-cluster3" in "us-east-1"
+2022-08-04 14:06:07 [ℹ]  CloudWatch logging will not be enabled for cluster "fargate-cluster3" in "us-east-1"
+2022-08-04 14:06:07 [ℹ]  you can enable it with 'eksctl utils update-cluster-logging --enable-types={SPECIFY-YOUR-LOG-TYPES-HERE (e.g. all)} --region=us-east-1 --cluster=fargate-cluster3'
+2022-08-04 14:06:07 [ℹ]  
+2 sequential tasks: { create cluster control plane "fargate-cluster3", 
+    2 sequential sub-tasks: { 
+        wait for control plane to become ready,
+        create fargate profiles,
+    } 
+}
+2022-08-04 14:06:07 [ℹ]  building cluster stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:06:09 [ℹ]  deploying stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:06:39 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
+2022-08-04 14:07:10 [ℹ]  waiting for CloudFormation stack "eksctl-fargate-cluster3-cluster"
 ```
