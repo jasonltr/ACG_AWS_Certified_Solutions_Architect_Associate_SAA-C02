@@ -165,5 +165,76 @@ Commercial support is available at
 - again to reiterate, there is nothing being created on ec2 
 
 
+### try deploy eks fargate with load balancer
+```
+eksctl create cluster --name fargate-cluster-2 --region us-east-1 --zones=us-east-1a,us-east-1b,us-east-1d --fargate
+```
+```
+eksctl create fargateprofile \
+  --cluster fargate-cluster \
+  --name parrot \
+  --namespace parrot
+```
+```
+eksctl get fargateprofile \
+  --cluster fargate-cluster \
+  -o yaml
+```
+```
+- name: parrot
+  podExecutionRoleARN: arn:aws:iam::949860833023:role/eksctl-fargate-cluster-clu-FargatePodExecutionRole-16XLVM0XW0KHG
+  selectors:
+  - namespace: parrot
+  status: CREATING
+  subnets:
+  - subnet-03acbce539ad50732
+  - subnet-07b8b1344ebd289db
+```
+```
+eksctl utils associate-iam-oidc-provider \
+    --region ${AWS_REGION} \
+    --cluster fargate-cluster \
+    --approve
+2022-08-05 10:59:46 [ℹ]  will create IAM Open ID Connect provider for cluster "fargate-cluster" in "us-east-1"
+2022-08-05 10:59:48 [✔]  created IAM Open ID Connect provider for cluster "fargate-cluster" in "us-east-1"
+```
+```
+curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy.json
+rm iam_policy.json
+```
+```
+eksctl create iamserviceaccount \
+  --cluster fargate-cluster  \
+  --namespace kube-system \
+  --name aws-load-balancer-controller2 \
+  --attach-policy-arn arn:aws:iam::949860833023:policy/AWSLoadBalancerControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve
+```
+```
+kubectl get sa aws-load-balancer-controller2 -n kube-system -o yaml
+```
+```
+kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller/crds?ref=master"
+```
+```
+helm repo add eks https://aws.github.io/eks-charts
 
+export VPC_ID=$(aws eks describe-cluster \
+                --name fargate-cluster \
+                --query "cluster.resourcesVpcConfig.vpcId" \
+                --output text)
 
+helm upgrade -i aws-load-balancer-controller2 \
+    eks/aws-load-balancer-controller2 \
+    -n kube-system \
+    --set clusterName=fargate-cluster \
+    --set serviceAccount.create=false \
+    --set serviceAccount.name=aws-load-balancer-controller \
+    --set image.tag=1-0-0 \
+    --set region=${AWS_REGION} \
+    --set vpcId=${VPC_ID} \
+    --version="${LBC_CHART_VERSION}"
