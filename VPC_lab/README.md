@@ -20,6 +20,7 @@ Try to document lab exercises to show proof of concepts
 
 ### create a vpc and subnet
 - using aws console create a vpc
+- set the IPv4 CIDR to 10.0.0.0/16, this means there are 65536 (2^16) available IPs to assign to resources in this vpc
 ![](/VPC_lab/images/vpc_3.png)
 - this is what we have created so far, SG, NACL and RT are created automatically with default settings
 ![](/VPC_lab/images/vpc_2.png)

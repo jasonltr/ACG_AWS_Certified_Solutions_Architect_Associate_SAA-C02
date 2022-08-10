@@ -165,7 +165,7 @@ Commercial support is available at
 - again to reiterate, there is nothing being created on ec2 
 
 
-### try deploy eks fargate with load balancer
+<!-- ### try deploy eks fargate with load balancer
 ```
 eksctl create cluster --name fargate-cluster-2 --region us-east-1 --zones=us-east-1a,us-east-1b,us-east-1d --fargate
 ```
@@ -237,4 +237,4 @@ helm upgrade -i aws-load-balancer-controller2 \
     --set image.tag=1-0-0 \
     --set region=${AWS_REGION} \
     --set vpcId=${VPC_ID} \
-    --version="${LBC_CHART_VERSION}"
+    --version="${LBC_CHART_VERSION}" -->
