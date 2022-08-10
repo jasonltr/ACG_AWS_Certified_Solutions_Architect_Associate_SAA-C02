@@ -46,6 +46,8 @@ Try to document lab exercises to show proof of concepts
 - run the eksctl command below (install eksctl [here](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html))
 ```
 jason@DEV-52WP6M3:~/Documents/eks-blue-green$ eksctl create cluster --name fargate-cluster3 --region us-east-1 --zones=us-east-1a,us-east-1b,us-east-1d --fargate
+```
+```
 2022-08-04 14:06:07 [ℹ]  eksctl version 0.107.0
 2022-08-04 14:06:07 [ℹ]  using region us-east-1
 2022-08-04 14:06:07 [ℹ]  subnets for us-east-1a - public:192.168.0.0/19 private:192.168.96.0/19
