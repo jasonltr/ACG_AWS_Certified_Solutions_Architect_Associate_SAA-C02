@@ -40,7 +40,7 @@ Try to document lab exercises to show proof of concepts
 - success! website/image is launched without creation of any instance
 - note that ECS cluster was still created
 
-### use EKS + fargate to launch the parrot image/website [tutorial](https://www.youtube.com/watch?v=DLmKMBZ_m3w)
+### use EKS + fargate to launch nginx image [tutorial](https://www.youtube.com/watch?v=DLmKMBZ_m3w)
 - Login to aws sandbox account 
 - using terminal, enter `aws configure` and enter credentials for the aws sandbox account
 - run the eksctl command below (install eksctl [here](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html))
@@ -162,7 +162,7 @@ Commercial support is available at
 </body>
 </html>
 ```
-- again to reiterate, there is nothing being created on ec2 
+- again to reiterate, there is no instances being created in ec2 
 
 
 <!-- ### try deploy eks fargate with load balancer
